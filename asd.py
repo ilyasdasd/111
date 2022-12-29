@@ -1,2 +1,0 @@
-print('asd')
-print('asdddddd')
