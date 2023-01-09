@@ -5,6 +5,7 @@ CREATE TABLE janres
 
 );
 
+
 CREATE TABLE performers
 (
 	performer_id serial PRIMARY KEY,
@@ -12,14 +13,27 @@ CREATE TABLE performers
 	performer_janre int REFERENCES janre(janre_id)
 );
 
+CREATE TABLE janre_performer
+(
+	janre_id int REFERENCES janres(janre_id),
+	performer_id REFERENCES performers(performer_id)
+);
+
 CREATE TABLE albums
 (
 	album_id serial PRIMARY KEY,
 	album_title varchar(60),
-	year_of_issue int NOT NULL,
-	performer int REFERENCES performers(performer_id)
+	year_of_issue int NOT NULL
 	
 );
+CREATE TABLE all_tracks
+ (
+ 	track_id serial PRIMARY KEY,
+	track_title varchar (60) NOT NULL,
+	album int REFERENCES albums(album_id),
+	performer varchar (60) NOT NULL,
+	duration real (6)
+ );
 
 CREATE TABLE collections
 (
@@ -28,18 +42,15 @@ CREATE TABLE collections
 	release_date date NOT NULL
 );
 
+CREATE TABLE collection_1
+(
+	album_id int REFERENCES albums(album_id),
+	track_id int REFERENCES all_tracks(track_id)
+);
+
 CREATE TABLE album_author
 (
 	album_id int REFERENCES album(album_id),
 	performer_id int REFERENCES performers(performer_id)
 	CONSTRAINT album_author_pkey PRIMARY KEY (album_id, performer_id)
 );
-
-CREATE TABLE all_tracks
- (
- 	track_id serial PRIMARY KEY,
-	track_title varchar (60) NOT NULL,
-	album int REFERENCES albums(album_id),
-	performer_id int REFERENCES performers(performer_id)
- )
-
