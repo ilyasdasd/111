@@ -16,7 +16,8 @@ CREATE TABLE performers
 CREATE TABLE janre_performer
 (
 	janre_id int REFERENCES janres(janre_id),
-	performer_id REFERENCES performers(performer_id)
+	performer_id REFERENCES performers(performer_id),
+	CONSTRAINT janre_performer_pk PRIMARY KEY (janre_id, performer_id) 
 );
 
 CREATE TABLE albums
@@ -45,7 +46,8 @@ CREATE TABLE collections
 CREATE TABLE collection_1
 (
 	album_id int REFERENCES albums(album_id),
-	track_id int REFERENCES all_tracks(track_id)
+	track_id int REFERENCES all_tracks(track_id),
+	CONSTRAINT collection_1_pk PRIMARY KEY (album_id, track_id)
 );
 
 CREATE TABLE album_author
