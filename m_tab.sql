@@ -9,8 +9,8 @@ CREATE TABLE janres
 CREATE TABLE performers
 (
 	performer_id serial PRIMARY KEY,
-	performer_name varchar(60),
-	performer_janre int REFERENCES janre(janre_id)
+	performer_name varchar(60)
+	
 );
 
 CREATE TABLE janre_performer
@@ -32,7 +32,6 @@ CREATE TABLE all_tracks
  	track_id serial PRIMARY KEY,
 	track_title varchar (60) NOT NULL,
 	album int REFERENCES albums(album_id),
-	performer varchar (60) NOT NULL,
 	duration real (6)
  );
 
@@ -45,9 +44,9 @@ CREATE TABLE collections
 
 CREATE TABLE collection_1
 (
-	album_id int REFERENCES albums(album_id),
+	collection_id int REFERENCES collections(collection_id),
 	track_id int REFERENCES all_tracks(track_id),
-	CONSTRAINT collection_1_pk PRIMARY KEY (album_id, track_id)
+	CONSTRAINT collection_1_pk PRIMARY KEY (collection_id, track_id)
 );
 
 CREATE TABLE album_author
